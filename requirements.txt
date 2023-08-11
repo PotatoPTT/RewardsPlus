@@ -5,3 +5,6 @@ requests
 selenium
 urllib3
 ipapi
+undetected-chromedriver
+mysql-connector-python
+pytz

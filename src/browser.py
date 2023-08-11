@@ -4,8 +4,7 @@ from pathlib import Path
 from typing import Any
 
 import ipapi
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+import undetected_chromedriver as uc
 from selenium.webdriver.chrome.webdriver import WebDriver
 
 from src.userAgentGenerator import GenerateUserAgent
@@ -41,15 +40,22 @@ class Browser:
     def browserSetup(
         self,
     ) -> WebDriver:
-        options = Options()
-        options.add_argument(f"user-agent={self.userAgent}")
-        options.add_argument(f"lang={self.localeLang}")
-        if self.headless:
-            options.add_argument("headless")
-        options.add_argument("log-level=3")
+        options = uc.ChromeOptions()
+        options.add_argument(f"--user-agent={self.userAgent}")
+        options.add_argument(f"--lang={self.localeLang}")
+        options.add_argument("--log-level=3")
+        options.add_argument("--window-size=1500,843")
         userDataDir = self.setupProfiles()
-        options.add_argument(f"user-data-dir={userDataDir.as_posix()}")
-        return webdriver.Chrome(options=options)
+        options.add_argument(f"--user-data-dir={userDataDir.as_posix()}")
+        if self.headless:
+            browser = uc.Chrome(options=options, headless=True, version_main=114)
+        else:
+            browser = uc.Chrome(options=options)
+        if self.browserType == "mobile":
+            browser.set_window_size(720, 1080)
+        else:
+            browser.set_window_size(1500, 843)
+        return browser
 
     def setupProfiles(self) -> Path:
         """
@@ -82,5 +88,5 @@ class Browser:
                     if geo is None:
                         geo = nfo["country"]
             except Exception:  # pylint: disable=broad-except
-                return ("en", "US")
+                return ("pt-BR", "BR")
         return (lang, geo)

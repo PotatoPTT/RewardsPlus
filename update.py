@@ -5,7 +5,7 @@ from zipfile import ZipFile
 import requests
 
 if __name__ == "__main__":
-    url = "https://github.com/charlesbel/Microsoft-Rewards-Farmer/archive/refs/heads/master.zip"
+    url = "https://github.com/PotatoPTT/RewardsPlus/archive/refs/heads/master.zip"
     folderName = "Microsoft-Rewards-Farmer-master"
     with open(".gitignore", "r") as f:
         exclusions = f.read().splitlines()

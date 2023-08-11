@@ -11,6 +11,7 @@ class MorePromotions:
 
     def completeMorePromotions(self):
         print("[MORE PROMO]", "Trying to complete More Promotions...")
+        self.browser.utils.goHome()
         morePromotions = self.browser.utils.getDashboardData()["morePromotions"]
         i = 0
         for promotion in morePromotions:

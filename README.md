@@ -10,7 +10,7 @@
 ██║╚██╔╝██║╚════██║    ██╔══╝  ██╔══██║██╔══██╗██║╚██╔╝██║██╔══╝  ██╔══██╗
 ██║ ╚═╝ ██║███████║    ██║     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗██║  ██║
 ╚═╝     ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝
-       by Charles Bel (@charlesbel)          version 3.0
+       by Charles Bel (@charlesbel) MOD BY:PTT    version 3.0
 ```
 
 ![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)
@@ -69,6 +69,8 @@
 * Multi-Account Management
 * Session storing (3.0)
 * 2FA Support (3.0)
+* Shopping Quiz (MOD)
+* DB Connection (MOD)
 
 ## Future Features
 
