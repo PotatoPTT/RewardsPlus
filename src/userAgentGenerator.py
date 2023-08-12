@@ -18,7 +18,7 @@ class GenerateUserAgent:
     EDGE_VERSION_PC = "183"
     EDGE_VERSION_MOBILE = "183"
 
-    MOBILE_DEVICE = "HD1913"
+    MOBILE_DEVICE = "MI A3"
 
     USER_AGENT_TEMPLATE = {
         "edge_pc": (

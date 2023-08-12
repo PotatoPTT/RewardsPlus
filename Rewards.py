@@ -109,7 +109,7 @@ def executeBot(loadedAccounts):
             if remainingSearchesM != 0:
                 desktopBrowser.closeBrowser()
                 sleep = random.randint(120, 200)
-                print("[SLEEP] Sleeping for {sleep} seconds")
+                print(f"[SLEEP] Sleeping for {sleep} seconds")
                 time.sleep(sleep)
                 with Browser(
                     mobile=True, account=currentAccount, args=argumentParser()
