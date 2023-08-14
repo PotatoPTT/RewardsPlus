@@ -177,6 +177,7 @@ class Utils:
         self.closeCurrentTab()
 
     def getRemainingSearches(self):
+        self.goHome()
         dashboard = self.getDashboardData()
         searchPoints = 1
         counters = dashboard["userStatus"]["counters"]
