@@ -94,8 +94,8 @@ def executeBot(loadedAccounts):
             if USA:
                 DailySet(desktopBrowser).completeDailySet()
                 PunchCards(desktopBrowser).completePunchCards()
-            shoppingRight = Shopping(desktopBrowser).completeShoppingQuiz()
             MorePromotions(desktopBrowser).completeMorePromotions()
+            shoppingRight = Shopping(desktopBrowser).completeShoppingQuiz()
 
             (
                 remainingSearches,
