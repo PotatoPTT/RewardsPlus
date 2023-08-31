@@ -48,7 +48,7 @@ class Browser:
         userDataDir = self.setupProfiles()
         options.add_argument(f"--user-data-dir={userDataDir.as_posix()}")
         if self.headless:
-            browser = uc.Chrome(options=options, headless=True, version_main=114)
+            browser = uc.Chrome(options=options, headless=True, version_main=116)
         else:
             browser = uc.Chrome(options=options)
         if self.browserType == "mobile":

@@ -63,10 +63,7 @@ class Shopping:
             SHOPPING_ATTEMPT = MAX_SHOPPING_ATTEMPT
             return
         self.webdriver.execute_script(
-            """var msnShoppingGamePane = document.querySelector("shopping-page-base")
-            ?.shadowRoot.querySelector("shopping-homepage")
-            ?.shadowRoot.querySelector("msft-feed-layout")
-            ?.shadowRoot.querySelector("msn-shopping-game-pane");
+            """var msnShoppingGamePane = document.querySelector("#root > div > div > fluent-design-system-provider > div > div:nth-child(4) > div > shopping-page-base").shadowRoot.querySelector("div > div.shopping-page-content > shopping-homepage").shadowRoot.querySelector("div > cs-feed-layout").shadowRoot.querySelector("msn-shopping-game-pane")
             if (msnShoppingGamePane != null) {
             msnShoppingGamePane.scrollIntoView({behavior: 'smooth'});
             msnShoppingGamePane.stopCardsAnimation = true; }"""
