@@ -8,6 +8,13 @@ SHOPPING_RIGHT = 0
 SHOPPING_ATTEMPT = 0
 MAX_SHOPPING_ATTEMPT = 10
 
+SCRIPT = """var msnShoppingGamePane = document.querySelector("#root > div > div > fluent-design-system-provider > div > div:nth-child(4) > div > shopping-page-base").shadowRoot.querySelector("div > div.shopping-page-content > shopping-homepage").shadowRoot.querySelector("div > cs-feed-layout").shadowRoot.querySelector("msn-shopping-game-pane")
+            if (msnShoppingGamePane != null) {
+            msnShoppingGamePane.scrollIntoView({behavior: 'smooth'});
+            msnShoppingGamePane.stopCardsAnimation = true; }"""
+
+GAMESTATE = """return document.querySelector("#root > div > div > fluent-design-system-provider > div > div:nth-child(4) > div > shopping-page-base").shadowRoot.querySelector("div > div.shopping-page-content > shopping-homepage").shadowRoot.querySelector("div > cs-feed-layout").shadowRoot.querySelector("msn-shopping-game-pane").gameState"""
+
 
 class Shopping:
     def __init__(self, browser: Browser):
@@ -42,44 +49,21 @@ class Shopping:
             time.sleep(2)
         numbers = [670, 920, 1170]
 
-        self.webdriver.execute_script(
-            """var msnShoppingGamePane = document.querySelector("shopping-page-base")
-            ?.shadowRoot.querySelector("shopping-homepage")
-            ?.shadowRoot.querySelector("msft-feed-layout")
-            ?.shadowRoot.querySelector("msn-shopping-game-pane");
-            if (msnShoppingGamePane != null) {
-            msnShoppingGamePane.scrollIntoView({behavior: 'smooth'});
-            msnShoppingGamePane.stopCardsAnimation = true; }"""
-        )
+        self.webdriver.execute_script(SCRIPT)
         time.sleep(1)
         time.sleep(1)
-        if (
-            self.webdriver.execute_script(
-                'return document.querySelector("#root > div > div > fluent-design-system-provider > div > div:nth-child(4) > div > shopping-page-base").shadowRoot.querySelector("div > div.shopping-page-content > shopping-homepage").shadowRoot.querySelector("div > msft-feed-layout").shadowRoot.querySelector("msn-shopping-game-pane").gameState'
-            )
-            == "idle"
-        ):
+        if self.webdriver.execute_script(GAMESTATE) == "idle":
             print("[SHOP] Shopping already done!")
             SHOPPING_ATTEMPT = MAX_SHOPPING_ATTEMPT
             return
-        self.webdriver.execute_script(
-            """var msnShoppingGamePane = document.querySelector("#root > div > div > fluent-design-system-provider > div > div:nth-child(4) > div > shopping-page-base").shadowRoot.querySelector("div > div.shopping-page-content > shopping-homepage").shadowRoot.querySelector("div > cs-feed-layout").shadowRoot.querySelector("msn-shopping-game-pane")
-            if (msnShoppingGamePane != null) {
-            msnShoppingGamePane.scrollIntoView({behavior: 'smooth'});
-            msnShoppingGamePane.stopCardsAnimation = true; }"""
-        )
+        self.webdriver.execute_script(SCRIPT)
         time.sleep(10)
         # for loop was here
         for i in range(SHOPPING_ATTEMPT, MAX_SHOPPING_ATTEMPT):
             SHOPPING_ATTEMPT += 1
             selectedIndex = random.randint(0, 2)
             selectedNumber = numbers[selectedIndex]
-            if (
-                self.webdriver.execute_script(
-                    'return document.querySelector("#root > div > div > fluent-design-system-provider > div > div:nth-child(4) > div > shopping-page-base").shadowRoot.querySelector("div > div.shopping-page-content > shopping-homepage").shadowRoot.querySelector("div > msft-feed-layout").shadowRoot.querySelector("msn-shopping-game-pane").gameState'
-                )
-                == "lose"
-            ):
+            if self.webdriver.execute_script(GAMESTATE) == "lose":
                 prRed("[SHOP] Something gone wrong!")
                 return
             self.clickXY(selectedNumber, 200)  # 670, 920, 1170
@@ -87,33 +71,15 @@ class Shopping:
             self.webdriver.save_screenshot(
                 f"./database/shopping/screenshots/{SHOPPING_ATTEMPT}screenshot.png"
             )
-            if (
-                self.webdriver.execute_script(
-                    'return document.querySelector("#root > div > div > fluent-design-system-provider > div > div:nth-child(4) > div > shopping-page-base").shadowRoot.querySelector("div > div.shopping-page-content > shopping-homepage").shadowRoot.querySelector("div > msft-feed-layout").shadowRoot.querySelector("msn-shopping-game-pane").gameState'
-                )
-                == "win"
-            ):
+            if self.webdriver.execute_script(GAMESTATE) == "win":
                 SHOPPING_RIGHT += 1
                 print(
                     f"[SHOP] Shopping Attempt {SHOPPING_ATTEMPT}: It got one! {SHOPPING_RIGHT}/10"
                 )
-                self.webdriver.execute_script(
-                    """var msnShoppingGamePane = document.querySelector("shopping-page-base")
-                    ?.shadowRoot.querySelector("shopping-homepage")
-                    ?.shadowRoot.querySelector("msft-feed-layout")
-                    ?.shadowRoot.querySelector("msn-shopping-game-pane");
-                    if (msnShoppingGamePane != null) {
-                    msnShoppingGamePane.scrollIntoView({behavior: 'smooth'});
-                    msnShoppingGamePane.stopCardsAnimation = true; }"""
-                )
+                self.webdriver.execute_script(SCRIPT)
                 time.sleep(2)
                 return
-            elif (
-                self.webdriver.execute_script(
-                    'return document.querySelector("#root > div > div > fluent-design-system-provider > div > div:nth-child(4) > div > shopping-page-base").shadowRoot.querySelector("div > div.shopping-page-content > shopping-homepage").shadowRoot.querySelector("div > msft-feed-layout").shadowRoot.querySelector("msn-shopping-game-pane").gameState'
-                )
-                == "idle"
-            ):
+            elif self.webdriver.execute_script(GAMESTATE) == "idle":
                 print("[SHOP] Shopping already done!")
                 SHOPPING_ATTEMPT = MAX_SHOPPING_ATTEMPT
                 return
